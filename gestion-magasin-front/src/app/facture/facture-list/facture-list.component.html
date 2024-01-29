@@ -1,0 +1,363 @@
+ <h1 text-center></h1>
+<!---------div class="list row">
+    <div class="col-md-8">
+      <div class="input-group mb-3">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by id"
+          
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchId()"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <h4>Facture List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let f of facturelist; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveFacture(f, i)"
+        >
+          {{ f.id }}
+        </li>
+      </ul>
+  
+      <button class="m-3 btn btn-sm btn-danger" (click)="removeAllFacture()">
+        Remove All
+      </button>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentfacture">
+        <h4>Facture</h4>
+        <div>
+          <label><strong>id:</strong></label> -------{{ currentfacture.id }}--->
+        <!--------/div>
+        <div>
+          <label><strong>Description:</strong></label>
+          ----{{ currentfacture.description }}---->
+        <!-------/div>
+         
+  
+        <a class="badge badge-warning" href=" ">
+          Edit
+        </a>
+      </div>
+  
+      <div *ngIf="!currentfacture">
+        <br />
+        <p>Please enter  a bill...</p>
+      </div>
+    </div>
+  </div>----------->
+   
+ 
+  <!----<nav class="navbar navbar-expand-md navbar-light bg-white fixed-top" id="navbarResponsive" style=" background-color: darkslategray;">
+    <div class="container-fluid" style="background-color: burlywood;"> 
+      <h1><b>Liste des Factures </b></h1>
+      <nav class="navbar navbar-expand-md navbar-light bg-white" id="navbarResponsive">
+     <a href="#" class="navbar-brand">
+        <img src="facture1.png" alt="" class="img-fluid w-25"></a>
+
+        <button class="navbar-toggler me-3" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+ 
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav ms-3">
+            <li class="nav-item">
+                <a href="#home" class="nav-link" routerLink="/home"><b>Home</b></a></li>
+            <li class="nav-item">
+                <a href="#about" class="nav-link"routerLink="/facture"><b>Acceuil Facture</b></a></li>
+            <li class="nav-item">
+                 
+            <li class="nav-item">
+                <a href="#contact" class="nav-link"></a></li>
+                <li><div class="d-flex">
+                  <button (click)="cliclAddFacture()"type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Ajouter Facture</button>
+                </div>
+              </li>
+        </ul>
+   </div>
+</nav>
+    </div>
+  </nav>
+    
+    <table class="table mt-3">
+      <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">Nom et Prenom</th>
+        <th scope="col">id Client</th>
+        <th scope="col">Date_facture</th>
+        <th scope="col">active</th>
+        <th scope="col">id produit</th>
+        <th scope="col">montant_facture </th>
+        <th scope="col">montant_remise </th>
+         
+         
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of factureData ">
+        <td>{{row.id}}</td>
+        <td>{{row.Nom}}</td>
+         <td>{{row.idClient}}</td>
+         <td>{{row.dateFacture}}</td>
+         <td>{{row.active}}</td>
+         <td>{{row.idProduit}}</td>
+         <td>{{row.montantFacture}}</td>
+         <td>{{row.montantRemise}}</td>
+
+        <td>
+          <button  type='button' (click)="onEdit(row)" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-info"  > Edit</button>
+          <button  (click)=" deleteFacture(row)"class= "btn btn-danger "   >Delete    </button>
+           
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div id="myPaypalButtons"></div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"  ><b>Nouvelle Facture</b></h3>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        
+        
+        
+        
+        
+        <form class="row g-3 needs-validation mt-3" [formGroup]='formValue' style="color: darkcyan; background-color: #F0F0F0;" >
+          <div class="col-md-4">
+            <label for="validationCustom02" class="form-label"><b>Nom et Prenom</b></label>
+            <input type="text" class="form-control" formControlName='Nom'id="validationCustom02" value="" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <div class="col-md-4">
+            <label for="validationCustomUsername" class="form-label"><b>Id Client</b></label>
+            <div class="input-group has-validation">
+              <span class="input-group-text" id="inputGroupPrepend"><b>#</b></span>
+              <input type="number" class="form-control" formControlName='idClient' id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+              <div class="invalid-feedback">
+                Please choose a username.
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="validationCustom03" class="form-label"><b>Date Facture</b></label>
+            <input type="text" class="form-control" formControlName='dateFacture'id="validationCustom03" required>
+            <div class="invalid-feedback">
+              Please provide a valid city.
+            </div>
+          </div>
+          <div class="col-md-3">
+            <label for="validationCustom04" class="form-label"><b>active</b></label>
+            <select class="form-select" formControlName='active'id="validationCustom04" required>
+              <option selected disabled value="">Choose...</option>
+              <option>Oui</option>
+              <option>Non</option>
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+           
+           
+      
+           
+             
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"><b>Id Produit</b></label>
+              <input type="number" formControlName='idProduit' class="form-control" id="exampleInputPassword1">
+            </div>
+             
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"><b>Montant Facture</b></label>
+              <input type="number" class="form-control" formControlName='montantFacture' id="exampleInputPassword1">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputPassword1" class="form-label"><b>Montant Remise</b></label>
+              <input type="number" class="form-control" formControlName='montantRemise' id="exampleInputPassword1">
+            </div>
+             
+            
+           
+        </form>
+        <div  id="myPaypalButtons"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary"data-bs-dismiss="modal">Close</button>
+        <button type="button" *ngIf="showAdd" class="btn btn-primary" (click)="postFactureDetail()">Add</button>
+        <button type="button" *ngIf="showUpdate" class="btn btn-primary" (click)="updateFactureDetail()">Update</button>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div  id="myPaypalButtons"></div> 
+ ------>
+
+ <head>
+  <meta charset="utf-8">
+  <title>Invoice</title>
+   
+  <link rel="license" href="https://www.opensource.org/licenses/mit-license/">
+  <script src="script.js"></script>
+</head>
+<body>
+  <header>
+    <h1 id='invoice'>Invoices</h1>
+    <h1 class="card-title"><b>Nos Factures</b></h1>
+  
+    <address contenteditable style="padding-left: 5%;">
+      <span> <p><img alt="" src="assets/store.jpg" width="10%"  ></p></span>
+        <p>   Magazin Esprit <br>
+      Rue Andre Ampére-Pole Technologique-El Ghazella<br>Tel:+216 70 250 000<br>
+      Fax:+216 70 685 454   </p> 
+    </address>
+ 
+      
+   
+
+ <div class="card-body">
+  <p>Today is {{ dateToday | date: "shortDate" }}</p>
+  
+
+
+ <div class="table-responsive">
+       
+  <br>
+  <nav class ="navbar">
+    <input class="form-control" type="text" name="dateFacture" [(ngModel)]="dateFacture" (ngModelChange)=" Search()" placeholder="entrer une date">
+  </nav>
+<table id="datatableexample"  class="table table-striped table-dark" >
+<thead >
+
+
+   <tr >
+       <th  >Id  </th>
+       <th >Montant Remise</th>
+       <th >Montant Facture</th>
+       <th >  Date </th>
+       <th>Active</th>
+       
+       
+    
+       <th>modifier</th>
+       <th>supprimer</th>
+      
+      
+
+   </tr>
+</thead>
+
+<tbody>
+
+  
+       <tr *ngFor="let fac of listfacture   "  >
+        <td [ngStyle]="{ color : colorier(fac.idDetailProduit)}" >{{fac.idDetailProduit}}</td>
+       <td >{{fac.montantRemise}}</td>
+       <td [ngClass]="{ 'text-danger' :fac.montantFacture >500}">{{fac.montantFacture}}</td>
+       <td>{{fac.dateFacture | date:'MM/dd/yyyy'}}</td>
+      <td>{{fac.active}}</td>
+       
+     
+      
+   <td>   <button  class="gg-edit-markup" class=" btn btn-primary" (click)="update(fac.idDetailProduit,fac)" onClick="window.location.reload();"><i class="icon_close_alt2"></i>modifier</button>  </td>
+<td>    <button class="gg-trash" class=" btn btn-danger" (click)="deleteFacture(fac.idDetailProduit)"><i class="icon_close_alt2"></i>Cancel</button>
+</td>  
+        
+      
+    
+
+
+
+
+   </tr>
+</tbody>
+ 
+</table>
+</div>
+
+
+
+
+
+</div>
+<div >
+<div class="card-body ">
+<div class="card-title"><h1><b> Ajouter Une Facture</b></h1></div>
+<hr>
+<form [formGroup]="factureForm" (ngSubmit)="handelSubmit() " style=" color: #f5fffafb; background-color:rgb(66, 63, 63)">
+<div class="form-group">
+<label for="input-1"><b>Montant Remise</b></label>
+<input type="number" class="form-control"  formControlName="montantRemise" id="montantRemise" placeholder="Entrer votre montant remise">
+</div>
+<div class="form-group">
+<label for="input-2"><b>Montant Facture</b></label>
+<input type="number" class="form-control" formControlName="montantFacture"id="montantFacture" placeholder="Entrer votre montant facture">
+</div>
+<div class="form-group">
+<label for="input-3"><b>Date</b> </label>
+<input type="date" class="form-control"  formControlName="dateFacture"id="dateFacture" placeholder="choisir la date">
+</div>
+  
+<div class="form-group py-2">
+   <div class="icheck-material-white">
+  <input type="checkbox" formControlName="active" id="active" checked=""/>
+  <label for="active"><b>Active</b></label>
+  </div>
+ </div>
+
+
+
+<div class="form-group">
+<button type="submit" class="btn btn-success" onClick="window.location.reload();"(click)="postFactureDetails()"><i class="icon-lock" (click)='showToastr()'></i> Register</button>
+</div>
+
+</form>
+
+</div>
+</div>
+     
+
+
+
+          <div style="padding-left: 20%" class="d-flex align-center" id="myPaypalButtons" > </div> 
+           
+  <h1>QR CODE 
+  <qrcode  [qrdata]="myAbgularxQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode></h1>
+
+           <app-remarque (childEvent)="message = $event"  ></app-remarque>
+           {{message}}
+            <app-footer [nameFromParent]="name"  >    </app-footer>
+             
+           
+          
+             
+
+
+ 
+ 
+
+
+  
+  

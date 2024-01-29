@@ -1,0 +1,11 @@
+<form>
+  <!-- TODO make it a card -->
+<div>
+  <mat-form-field appearance="fill">
+    <mat-label></mat-label>
+      <input matInput type="text" placeholder="search"
+      [(ngModel)]="searchTerm" [ngModelOptions]="{standalone: true}" (keyup)="search($event)">
+  </mat-form-field>
+</div>
+ 
+</form>

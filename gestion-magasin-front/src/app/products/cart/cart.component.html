@@ -1,0 +1,15 @@
+<div *ngIf="cartItems.length === 0 " class="alert alert-info">No items added</div>
+
+<mat-list *ngIf="cartItems.length > 0" role="list">
+  <mat-list-item role="listitem" *ngFor="let item of cartItems">
+    <app-cart-item [cartItem]="item"></app-cart-item>
+    
+
+  </mat-list-item>
+  <div fxLayout="column" fxLayoutAlign="space-around stretch" >
+    
+    <mat-list-item role="listitem"><strong>total: {{cartTotal | currency:'USD'}}</strong></mat-list-item>
+    <button mat-flat-button color="accent" [routerLink]="['/facture/listf']" [queryParams]="{cartTotal}">Checkout</button>
+  </div>
+  
+</mat-list>

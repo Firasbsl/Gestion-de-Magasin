@@ -1,0 +1,17 @@
+<div class="cart-item">
+
+    <span>{{cartItem.libelle}}
+
+    </span> x 
+    
+    <span>{{cartItem.qty}}
+    </span>=
+    
+    <span> 
+        <strong>{{ (cartItem.qty * cartItem.price) | currency:'USD'}}</strong> 
+    </span>
+    <button mat-icon-button aria-label="Example icon button with a vertical three dot icon" (click)="removeCart(cartItem.id)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    <mat-divider></mat-divider>
+</div>
